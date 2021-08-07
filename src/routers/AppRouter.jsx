@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import PokemonScreen from "../components/pokemon/PokemonScreen";
 import Header from "../components/ui/Header";
 import NotFoundScreen from "../components/notfound/NotFoundScreen";
@@ -17,7 +12,7 @@ const AppRouter = () => {
       <Header />
       <div className="container mb-4">
         <div className="row">
-          <Router>
+          <HashRouter>
             <Switch>
               <Route exact path="/" component={PokemonScreen} />
               <Route exact path="/pokemon" component={PokemonScreen} />
@@ -25,7 +20,7 @@ const AppRouter = () => {
               <Route exact path="/404" component={NotFoundScreen} />
               <Redirect to="/404" />
             </Switch>
-          </Router>
+          </HashRouter>
         </div>
       </div>
       <Footer />
