@@ -9,9 +9,18 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  imageName: 'pokemon-challenge'
+
 steps:
-- task: KubernetesManifest@0
+- task: DockerInstaller@0
   inputs:
-    action: 'deploy'
-    kubernetesServiceConnection: 'eks-mundos-e-2'
-    manifests: 'deployment/deployment.yaml'
+    dockerVersion: '17.09.0-ce'
+- task: Docker@2
+  displayName: Build and push an image to container registry
+  inputs:
+    containerRegistry: 'docker-registry'
+    repository: $(imageName)
+    command: 'buildAndPush'
+    tags: |
+        0.1.0
