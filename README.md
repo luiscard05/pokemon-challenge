@@ -23,14 +23,19 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 
 ### Docker
-`
 
-docker info
+* Build docker image
 
-docker --version
+    ```
+    docker build -t evacacela/pokemon-challenge:1.0.0-RELEASE .
+    ```
 
--- create an image
-docker build -f Dockerfile -t client .
-docker run -it -p 4001:3000 client
+* Run docker container
+    ```
+    docker run -it -p 8080:3000 evacacela/pokemon-challenge:1.0.0-RELEASE
+    ```
 
-`
+* Push docker image
+    ```
+    docker push evacacela/pokemon-challenge:1.0.0-RELEASE
+    ```
