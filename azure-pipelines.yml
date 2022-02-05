@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  imageName: 'pokemon-challenge'
+  imageName: 'evacacela/pokemon-challenge'
 
 steps:
 - task: DockerInstaller@0
