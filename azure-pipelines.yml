@@ -24,3 +24,8 @@ steps:
     command: 'buildAndPush'
     tags: |
         0.1.0
+- task: KubernetesManifest@0
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'eks-devops-pin-sc'
+    manifests: 'deployment/deployment.yaml' 
