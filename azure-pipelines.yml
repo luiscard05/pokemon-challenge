@@ -33,6 +33,12 @@ steps:
     awsCredentials: 'eks-service-connection'
     regionName: 'us-east-1'
 - task: CmdLine@2
+  displayName: kubeconfig was configured
+  inputs:
+    script: |
+      aws eks --region us-east-1 update-kubeconfig --name mundose-eks-pin
+    failOnStderr: true
+- task: CmdLine@2
   displayName: Deploy the app on k8s cluster
   inputs:
     script: |
