@@ -24,8 +24,17 @@ steps:
     command: 'buildAndPush'
     tags: |
         0.1.0
-- task: KubernetesManifest@0
+- task: KubectlInstaller@0
   inputs:
-    action: 'deploy'
-    kubernetesServiceConnection: 'eks-devops-pin-sc'
-    manifests: 'deployment/deployment.yaml' 
+    kubectlVersion: 'latest'
+- task: aws-eks-authenticator@0
+  inputs:
+    clusterName: 'mundose-eks-pin'
+    awsCredentials: 'eks-service-connection'
+    regionName: 'us-east-1'
+- task: CmdLine@2
+  displayName: Deploy the app on k8s cluster
+  inputs:
+    script: |
+      kubectl apply -f deployment/
+    failOnStderr: true
