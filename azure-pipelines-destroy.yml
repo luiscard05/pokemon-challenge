@@ -13,17 +13,6 @@ variables:
   imageName: 'evacacela/pokemon-challenge'
 
 steps:
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: '17.09.0-ce'
-- task: Docker@2
-  displayName: Build and push an image to container registry
-  inputs:
-    containerRegistry: 'docker-registry'
-    repository: $(imageName)
-    command: 'buildAndPush'
-    tags: |
-        0.1.0
 - task: KubectlInstaller@0
   inputs:
     kubectlVersion: 'latest'
@@ -39,8 +28,8 @@ steps:
       aws eks --region us-east-1 update-kubeconfig --name mundose-eks-pin
     failOnStderr: true
 - task: CmdLine@2
-  displayName: Deploy the app on k8s cluster
+  displayName: Destroy the app from k8s cluster
   inputs:
     script: |
-      kubectl apply -f deployment/
+      kubectl delete -f deployment/
     failOnStderr: true
